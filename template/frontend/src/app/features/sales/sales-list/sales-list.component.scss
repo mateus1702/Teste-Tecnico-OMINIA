@@ -1,0 +1,61 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+
+  h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+
+  .subtitle {
+    margin: 0.25rem 0 0;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.toolbar {
+  margin-bottom: 1rem;
+
+  .order-field {
+    width: 260px;
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.table-container {
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+table {
+  width: 100%;
+}
+
+.empty-row {
+  text-align: center;
+  padding: 2rem !important;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.active-chip {
+  --mdc-chip-label-text-color: #2e7d32;
+  background: #e8f5e9 !important;
+}
+
+.cancelled-chip {
+  --mdc-chip-label-text-color: #c62828;
+  background: #ffebee !important;
+}
+
+mat-paginator {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}

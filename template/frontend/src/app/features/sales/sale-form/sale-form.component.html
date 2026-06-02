@@ -1,0 +1,116 @@
+<div class="page-header">
+  <div>
+    <h1>{{ isEditMode ? 'Edit Sale' : 'New Sale' }}</h1>
+    <p class="subtitle">
+      {{ isEditMode ? 'Replace sale items and update details' : 'Create a new sale with line items' }}
+    </p>
+  </div>
+  <button mat-stroked-button routerLink="/sales">
+    <mat-icon>arrow_back</mat-icon>
+    Back to list
+  </button>
+</div>
+
+@if (loading) {
+  <div class="loading">
+    <mat-spinner diameter="48"></mat-spinner>
+  </div>
+} @else {
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>Sale details</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Sale date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="saleDate" />
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          @if (form.get('saleDate')?.invalid && form.get('saleDate')?.touched) {
+            <mat-error>Sale date is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Customer name</mat-label>
+          <input matInput formControlName="customerName" />
+          @if (form.get('customerName')?.invalid && form.get('customerName')?.touched) {
+            <mat-error>Customer name is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Branch name</mat-label>
+          <input matInput formControlName="branchName" />
+          @if (form.get('branchName')?.invalid && form.get('branchName')?.touched) {
+            <mat-error>Branch name is required</mat-error>
+          }
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>Items</mat-card-title>
+        <button mat-stroked-button type="button" (click)="addItem()">
+          <mat-icon>add</mat-icon>
+          Add item
+        </button>
+      </mat-card-header>
+      <mat-card-content formArrayName="items">
+        @for (item of items.controls; track $index; let i = $index) {
+          <div class="item-row" [formGroupName]="i">
+            <mat-form-field appearance="outline">
+              <mat-label>Product name</mat-label>
+              <input matInput formControlName="productName" />
+              @if (item.get('productName')?.invalid && item.get('productName')?.touched) {
+                <mat-error>Product name is required</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="qty-field">
+              <mat-label>Qty</mat-label>
+              <input matInput type="number" formControlName="quantity" min="1" max="20" />
+              <mat-hint>Max 20 per item</mat-hint>
+              @if (item.get('quantity')?.invalid && item.get('quantity')?.touched) {
+                <mat-error>Quantity must be between 1 and 20</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="price-field">
+              <mat-label>Unit price</mat-label>
+              <input matInput type="number" formControlName="unitPrice" min="0.01" step="0.01" />
+              @if (item.get('unitPrice')?.invalid && item.get('unitPrice')?.touched) {
+                <mat-error>Unit price must be greater than zero</mat-error>
+              }
+            </mat-form-field>
+
+            <button
+              mat-icon-button
+              type="button"
+              color="warn"
+              (click)="removeItem(i)"
+              [disabled]="items.length === 1">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          @if (i < items.length - 1) {
+            <mat-divider></mat-divider>
+          }
+        }
+      </mat-card-content>
+    </mat-card>
+
+    <div class="actions">
+      <button mat-stroked-button type="button" routerLink="/sales">Cancel</button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="saving || form.invalid">
+        @if (saving) {
+          <mat-spinner diameter="20"></mat-spinner>
+        } @else {
+          {{ isEditMode ? 'Update sale' : 'Create sale' }}
+        }
+      </button>
+    </div>
+  </form>
+}

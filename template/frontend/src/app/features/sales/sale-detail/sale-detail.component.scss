@@ -1,0 +1,73 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+
+  .subtitle {
+    margin: 0.25rem 0 0;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.info-card {
+  margin-bottom: 1.5rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  .total {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+}
+
+table {
+  width: 100%;
+}
+
+.active-chip {
+  --mdc-chip-label-text-color: #2e7d32;
+  background: #e8f5e9 !important;
+}
+
+.cancelled-chip {
+  --mdc-chip-label-text-color: #c62828;
+  background: #ffebee !important;
+}

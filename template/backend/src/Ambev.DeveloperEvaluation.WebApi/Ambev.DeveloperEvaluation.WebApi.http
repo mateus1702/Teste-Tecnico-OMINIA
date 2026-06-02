@@ -1,0 +1,40 @@
+@host = http://localhost:8080
+
+### List sales
+GET {{host}}/api/Sales?_page=1&_size=10&_order=saleDate desc
+Accept: application/json
+
+### Create sale (10% discount: qty 5)
+POST {{host}}/api/Sales
+Content-Type: application/json
+
+{
+  "saleDate": "2026-06-01T12:00:00Z",
+  "customerId": "11111111-1111-1111-1111-111111111111",
+  "customerName": "John Doe",
+  "branchId": "22222222-2222-2222-2222-222222222222",
+  "branchName": "Downtown",
+  "items": [
+    {
+      "productId": "33333333-3333-3333-3333-333333333333",
+      "productName": "Keyboard",
+      "quantity": 5,
+      "unitPrice": 100.00
+    }
+  ]
+}
+
+### Get sale by id
+@saleId = 00000000-0000-0000-0000-000000000000
+GET {{host}}/api/Sales/{{saleId}}
+Accept: application/json
+
+### Cancel sale
+POST {{host}}/api/Sales/{{saleId}}/cancel
+Content-Type: application/json
+
+{}
+
+### Health check
+GET {{host}}/health
+Accept: application/json

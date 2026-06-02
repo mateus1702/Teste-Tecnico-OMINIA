@@ -1,0 +1,21 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.brand-icon {
+  margin-right: 0.5rem;
+}
+
+.brand-title {
+  font-weight: 500;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.active-link {
+  background: rgba(255, 255, 255, 0.12);
+}
