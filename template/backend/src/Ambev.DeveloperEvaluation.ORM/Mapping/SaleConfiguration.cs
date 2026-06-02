@@ -11,7 +11,7 @@ public class SaleConfiguration : IEntityTypeConfiguration<Sale>
         builder.ToTable("Sales");
 
         builder.HasKey(s => s.Id);
-        builder.Property(s => s.Id).HasColumnType("uuid").HasDefaultValueSql("gen_random_uuid()");
+        builder.Property(s => s.Id).HasColumnType("uuid").ValueGeneratedNever();
 
         builder.Property(s => s.SaleNumber)
             .ValueGeneratedOnAdd()
